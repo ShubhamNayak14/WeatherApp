@@ -5,7 +5,6 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/";
 const getWeatherData = async (infoType, searchParams) => {
   const url = new URL(BASE_URL + "/" + infoType);
   url.search = new URLSearchParams({ ...searchParams, appid: API_KEY });
-
   const res = await fetch(url);
   return res.json();
 };
@@ -74,6 +73,8 @@ const formatForecastWeather = (secs, offset, data) => {
       temp: f.main.temp,
       title: formatToLocalTime(f.dt, offset, "ccc"),
       icon: iconUrlformCode(f.weather[0].icon),
+      temp_max: f.main.temp_max,
+      temp_min: f.main.temp_min,
       date: f.dt_txt,
     }));
 
